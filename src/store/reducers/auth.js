@@ -1,4 +1,4 @@
-import * as actiontypes from '../actions/actionTypes';
+import * as actionTypes from '../actions/actionTypes';
 import { updatedObject } from '../utility';
 
 
@@ -7,11 +7,12 @@ const initialState = {
     userId: null,
     error: null,
     loading: false,
+    authRedirectPath: '/'
 };
 
 const authStart = () => {
     return {
-        type: actiontypes.AUTH_START
+        type: actionTypes.AUTH_START
     };
 };
 
@@ -35,12 +36,17 @@ const authLogout = (state, action) => {
     return updatedObject(state, {token: null, userId: null});
 }
 
+const setAuthRedirectPath = (state, action) => {
+    return updatedObject(state, {authRedirectPath: action.path});
+}
+
 const reducer = ( state=initialState, action )=> {
     switch(action.type){
-        case actiontypes.AUTH_START: return authStart(state, action)
-        case actiontypes.AUTH_SUCCESS: return authSuccess(state, action)
-        case actiontypes.AUTH_FAIL: return authFail(state, action)
-        case actiontypes.AUTH_LOGOUT: return authLogout(state, action)        
+        case actionTypes.AUTH_START: return authStart(state, action)
+        case actionTypes.AUTH_SUCCESS: return authSuccess(state, action)
+        case actionTypes.AUTH_FAIL: return authFail(state, action)
+        case actionTypes.AUTH_LOGOUT: return authLogout(state, action)    
+        case actionTypes.SET_AUTH_REDIRECT_PATH: return setAuthRedirectPath(state, action)    
         default: 
             return state;
     }
