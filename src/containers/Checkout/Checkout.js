@@ -68,7 +68,7 @@ const mapStateToProps = state => {
         ings: state.burgerBuilder.ingredients,
         purchased: state.order.purchased
     };
-}
+};
 
 const mapDispatchToProps = dispatch => {
     return {
@@ -76,4 +76,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Checkout);
+export default connect( mapStateToProps,mapDispatchToProps )(Checkout);

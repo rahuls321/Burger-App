@@ -98,7 +98,7 @@ class Auth extends Component {
         this.props.onAuth(this.state.controls.email.value, this.state.controls.password.value, this.state.isSignup);
     }
 
-    switchAuthHandler = () => {
+    switchAuthModeHandler = () => {
         this.setState(prevState => {
             return {isSignup: !prevState.isSignup};
         });
@@ -125,7 +125,7 @@ class Auth extends Component {
                 changed={(event) => this.inputChangedHandler(event, formElement.id)}/>
         ));
 
-        if(this.state.loading){
+        if(this.props.loading){
             form = <Spinner />
         };
 
@@ -151,7 +151,7 @@ class Auth extends Component {
                     <Button btnType="Success">SUBMIT </Button>
                 </form>
                 <Button 
-                    clicked={this.switchAuthHandler}
+                    clicked={this.switchAuthModeHandler}
                     btnType="Danger">{this.state.isSignup ? 'SIGNIN' : 'SIGNUP'}</Button>
             </div>
         );
@@ -164,7 +164,7 @@ const mapStateToProps = state => {
         error: state.auth.error,
         isAuthenticated: state.auth.token !== null,
         buildingBurger: state.burgerBuilder.building,
-        authRedirectPath: state.auth.authRedirect,
+        authRedirectPath: state.auth.authRedirectPath,
     };
 };
 
